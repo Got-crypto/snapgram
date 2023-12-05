@@ -13,6 +13,7 @@ import {
   FormMessage
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { createUserAccount } from "@/lib/appwrite/api"
 import { SignupValidation } from "@/lib/validation"
 import { Link } from "react-router-dom"
 
@@ -29,8 +30,10 @@ export default function SignupForm() {
     },
   })
  
-  function onSubmit(values: z.infer<typeof SignupValidation>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof SignupValidation>) {
+    const newUser = await createUserAccount(values)
+
+    console.log('newUser', newUser)
   }
   return (
     <Form {...form}>
